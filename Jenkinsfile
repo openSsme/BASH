@@ -3,17 +3,10 @@ pipeline {
   stages {
     stage('initialize Consuela') {
       steps {
-        sh 'sudo cp Consuela.sh /usr/bin'
-        sh 'mkdir test'
-        sh 'cd test'
-        sh 'sudo Consuela.sh --nuell 44M'
-        sh 'cd ..'
-      }
-    }
-
-    stage('test Consuela') {
-      steps {
-        sh 'sudo Consuela.sh --limpiar test'
+        sh '''sudo cp Consuela.sh /usr/bin
+mkdir test cd test sudo Consuela.sh --nuell 44M cd ..'''
+        sh '''ls -og
+sudo Consuela.sh --limpiar test'''
       }
     }
 
