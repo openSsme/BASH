@@ -90,6 +90,6 @@ then
 	do
 		MC=`mcookie`
 		dd if=/dev/urandom of=$MC bs=$DIRT_SIZE count=1 iflag=fullblock 2>/dev/null
-		echo "I made a mess :} - $MC"
+		echo "I made a mess :} - $MC : $DIRT_SIZE"
 	done
 fi
