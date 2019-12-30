@@ -7,6 +7,7 @@ pipeline {
         sh 'mkdir test'
         sh 'cd test'
         sh 'sudo Consuela.sh --nuell 44M'
+        sh 'cd ..'
       }
     }
 
