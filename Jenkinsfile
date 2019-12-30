@@ -8,6 +8,8 @@ mkdir test
 cd test
 sudo Consuela.sh --nuell 44M
 cd ..'''
+        sh '''cd ..
+sudo Consuela.sh --limpiar test'''
       }
     }
 
