@@ -47,14 +47,16 @@ Consuela(){
 	echo "Hola.. :|"
 	if [ -d $1 ]
 	then
+		echo -e "\nConsuela!, clean here: $1"
 		Limpiar_Duro $1
-		echo -e "\nphew..limpié $COUNTER cosas. ok adiós :|\n"
+		echo -e "\nphew.. limpié $COUNTER objetos. we need more lemon pledge! adiós :|\n"
 	elif [[ ! -d $1 && -s $1 ]]
 	then
+		echo -e "\nConsuela!, clean this: $1"
 		Limpiar $1
 		echo -e "\nok i go now.. adiós :|\n"
 	else
-		echo -e "\nno.. no.. no :|\n"
+		echo -e "\nnnno.. no.. is already clean :|\n"
 	fi
 }
 
