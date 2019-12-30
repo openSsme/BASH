@@ -11,7 +11,7 @@ pipeline {
 
         stage('create test directory') {
           steps {
-            sh 'sudo Consuela.sh mkdir test'
+            sh 'mkdir test'
           }
         }
 
