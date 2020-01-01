@@ -13,7 +13,7 @@ PARAMS=("--limpiar" "--descanso" "--ayuda")
 #------------------------------------------------------------------------------
 Limpiar(){ # TODO: SOLVE TIME COMPLEXION WITH ANSIBLE/DOCKER + STREAM WINDOW
 	SIZE=`ls -og "$1" |awk '{print $3'}`
-	echo -e "\nok i clean $1 - $SIZE now\n"
+	echo -e "\nok now i clean $1 - $SIZE\n"
 	sync
 	dd if=/dev/zero of="$1" bs=$SIZE count=1 iflag=fullblock 2>/dev/null
 	sync
