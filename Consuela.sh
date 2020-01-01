@@ -70,7 +70,9 @@ fi
 
 if [[ $# -ne $ARGS && $1 != ${PARAMS[2]} ]]
 then
-	echo "Usage: Consuela [--command] [option], --ayuda shows help"
+	echo "Usage: Consuela [--limpiar] <directory/file>"
+	echo "       Consuela [--descanso] <100M>"
+	echo "       Consuela [--ayuda]"
 	exit $E_WRONGARGS
 fi
 
@@ -94,7 +96,7 @@ then
 		MC=`mcookie`
 		dd if=/dev/urandom of=$MC bs=$SIZE count=1 iflag=fullblock 2>/dev/null
 		DETAILS=`ls -hog $MC`
-		echo "This was already broken :|	: $DETAILS"
+		echo "This was already broken :|	 $DETAILS"
 	done
 fi
 
