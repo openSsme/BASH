@@ -9,8 +9,7 @@ mkdir test'''
 sudo Consuela.sh --ayuda
 sudo Consuela.sh --descanso 44M
 cd ..
-sudo Consuela.sh --limpiar test
-pwd'''
+sudo Consuela.sh --limpiar test'''
       }
     }
 
