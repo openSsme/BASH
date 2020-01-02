@@ -15,13 +15,13 @@ Limpiar(){ # TODO: SOLVE TIME COMPLEXION WITH ANSIBLE/DOCKER + STREAM WINDOW
 	SIZE=`ls -og "$1" |awk '{print $3'}`
 	echo -e "\nok now i clean $1 - $SIZE\n"
 	sync
-	dd if=/dev/zero of="$1" bs=$SIZE count=1 iflag=fullblock 2>/dev/null
+	dd if=/dev/zero of="$1" bs=$SIZE count=1 iflag=fullblock 1>&- 2>&-
 	sync
 	echo "Wipe 1"
-	tr '\0' '1' < /dev/zero |dd of="$1" bs=$SIZE count=1 iflag=fullblock 2>/dev/null
+	tr '\0' '1' < /dev/zero |dd of="$1" bs=$SIZE count=1 iflag=fullblock | 1>&- 2>&-
 	sync
 	echo "Wipe 2"
-	dd if=/dev/urandom of="$1" bs=$SIZE count=1 iflag=fullblock 2>/dev/null
+	dd if=/dev/urandom of="$1" bs=$SIZE count=1 iflag=fullblock 1>&- 2>&-
 	sync
 	echo "Wipe 3"
 	rm -f "$1"
@@ -33,10 +33,9 @@ Limpiar_Duro(){
 	readarray -t SUB < <(ls -1 $1)
 	for i in "${SUB[@]}"
 	do
-		if [ -d "$1/$i" ]
-		then
+		if [ -d "$1/$i" ]; then
 			Limpiar_Duro "$1/$i"
-		else
+		elif [[ ! -d "$1/$i" && -s "$1/$i" ]]; then
 			Limpiar "$1/$i"
 			let "COUNTER+=1"
 		fi
@@ -45,19 +44,26 @@ Limpiar_Duro(){
 
 Consuela(){
 	echo "Hola.. :|"
-	if [ -d $1 ]
-	then
-		echo -e "\nConsuela!, clean here: $1"
-		Limpiar_Duro $1
-		echo -e "\nphew.. limpié $COUNTER objetos. we need more lemon pledge! adiós :|\n"
-	elif [[ ! -d $1 && -s $1 ]]
-	then
-		echo -e "\nConsuela!, clean this: $1"
-		Limpiar $1
-		echo -e "\nok i go now.. adiós :|\n"
-	else
-		echo -e "\nnnno.. no.. is already clean :|\n"
-	fi
+	while true
+	do
+		if [[ -e $1 && -d $1 && -s $1 ]]; then
+			echo -e "\nConsuela!, clean here: $1"
+			Limpiar_Duro $1
+			if [ $COUNTER -ne 0 ]; then
+				echo -e "\nphew.. limpié $COUNTER objetos. we need more lemon pledge! adiós :|\n"
+				let "COUNTER=0"
+			else
+				echo -e "\nnnno.. no.. is already clean in there :|\n"
+			fi
+		elif [[ -e $1 && ! -d $1 && -s $1 ]]; then
+			echo -e "\nConsuela!, clean this: $1"
+			Limpiar $1
+			echo -e "\nok i go now.. adiós :|\n"
+		else
+			echo -e "\nnnno.. no.. is already clean :|\n"
+		fi
+		sleep 5
+	done
 }
 
 #------------------------------------------------------------------------------
