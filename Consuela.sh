@@ -62,7 +62,8 @@ Consuela(){
 				echo -e "\nnnno.. no.. is already clean :|\n"
 				break
 			fi
-			sleep 5
+			#sleep 5
+			break
 		done
 	else
 		echo -e "\nno.. no veu $1 :|\n"
