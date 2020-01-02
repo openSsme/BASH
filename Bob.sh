@@ -3,4 +3,6 @@
 # me like pie
 
 n=$1
-echo $n
+for (( i = 0; i < $n; i++ )); do
+  echo "PIE!!!"
+done

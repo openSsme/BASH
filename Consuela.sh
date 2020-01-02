@@ -96,7 +96,6 @@ case "$1" in
 			dd if=/dev/urandom of=$MC bs=$SIZE count=1 iflag=fullblock 2>/dev/null
 			DETAILS=`ls -hog $MC`
 			echo "This was already broken :|	 $DETAILS"
-			exit 0
 		done;;
 
 	--ayuda)
@@ -114,5 +113,5 @@ case "$1" in
 		echo -e "		Consuela --limpiar Dir1/Dir2\n"
 		echo -e "	Create 10 files of 100M worth of testing junk in current directory:"
 		echo -e "		Consuela --descanso 100M\n";;
-		
+
 esac
