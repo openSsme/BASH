@@ -8,7 +8,7 @@ process(){
   done
 }
 
-case $1 in
+case $1 in # Using a switch here for "Hachana Lemazgan"
     -p)
       for i in $@; do
         if [ -n $i ]; then
