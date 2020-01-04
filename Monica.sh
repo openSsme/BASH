@@ -1,9 +1,13 @@
 #!/bin/bash
 
+ROOT_UID=0
+E_NOROOT=13
+
 identify(){
   cols=`tput cols`
   split=`printf '%0.s#' $(seq 1 $cols)`
   systemctl list-machines; echo $split
+  free -hw; echo $split
   pvscan; echo ""
   pvdisplay; echo $split
   vgscan; echo ""
@@ -35,6 +39,11 @@ useradd(){
   done
   exit 0
 }
+
+if [ $UID -ne $ROOT_UID  ]; then
+	echo "not gonna happen. get root!"
+	exit $E_NOROOT
+fi
 
 case $1 in
   add)
