@@ -8,6 +8,7 @@ identify(){
   split=`printf '%0.s#' $(seq 1 $cols)`
   systemctl list-machines; echo $split
   free -hw; echo $split
+  cat /etc/*release*; echo $split
   pvscan; echo ""
   pvdisplay; echo $split
   vgscan; echo ""

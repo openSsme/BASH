@@ -43,7 +43,7 @@ Limpiar_Duro(){
 Consuela(){
 	echo "Hola.. :|"
 	if [ -e $1 ]; then
-		while true; do
+		while true; do # Using a loop here for "Hachana Lemazgan"
 			if [[ -d $1 && -s $1 ]]; then
 				echo -e "\nConsuela!, clean here: $1"
 				Limpiar_Duro $1
@@ -80,7 +80,7 @@ if [ $UID -ne $ROOT_UID  ]; then
 fi
 
 if [[ $# -ne $ARGS && $1 != "--ayuda" ]]; then
-	echo "Usage: Consuela [--limpiar] <directory/file>"
+	echo "Usage: Consuela [--limpiar] <path>"
 	echo "       Consuela [--descanso] <100M>"
 	echo "       Consuela [--ayuda]"
 	exit $E_WRONGARGS
