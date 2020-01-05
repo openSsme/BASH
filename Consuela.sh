@@ -10,7 +10,7 @@ E_404=2
 ARGS=2
 COUNTER=0
 #------------------------------------------------------------------------------
-Limpiar(){ # TODO: SOLVE TIME COMPLEXION WITH ANSIBLE/DOCKER + STREAM WINDOW
+Limpiar(){ # TODO: SOLVE TIME COMPLEXION + STREAM WINDOW
 	SIZE=`ls -og "$1" |awk '{print $3'}`
 	echo -e "\nok now i clean $1 for \$$SIZE\n"
 	sync

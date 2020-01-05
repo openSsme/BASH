@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # me like pie
-
+# TODO: Process a sort algo
 process(){
   for (( i = 0; i < $1; i++ )); do
     echo "PIE!!! - $1"
