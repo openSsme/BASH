@@ -75,7 +75,7 @@ Consuela(){
 #------------------------------------------------------------------------------
 
 if [ $UID -ne $ROOT_UID  ]; then
-	echo "\nno.. mister root no home :|\n"
+	echo -e "\nno.. mister root no home :|\n"
 	exit $E_NOROOT
 fi
 
@@ -104,7 +104,7 @@ case "$1" in
 		echo -e "Consuela utilizes lemon pledge (dd) for best cleaning results"
 		echo -e "Consuela charges \$1 per byte\n\n"
 		echo -e "COMMANDS:"
-		echo -e "	--limpiar <path/target>		:	securely wipe a single file or recursively wipe the contents of a directory"
+		echo -e "	--limpiar <path>		:	securely wipe a single file or recursively wipe the contents of a directory"
 		echo -e "	--descanso <block size>		:	creates 10 random files with a specified block size"
 		echo -e "	--ayuda				:	show this screen\n"
 		echo -e "EXAMPLES:"
