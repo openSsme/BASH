@@ -1,4 +1,5 @@
 #!/bin/bash
+# A SANDBOX SCRIPT
 
 ROOT_UID=0
 E_NOROOT=13
@@ -30,11 +31,12 @@ identify(){
 
 useradd(){
   PASS=`echo "d3f@Lt pA55w0Rd Mu5t 8e Ch@n63d" |openssl passwd -stdin -6`
-  sudo groupadd -g 509 $1-509
+  sudo groupadd "$1-509"
+  sudo groupmod -g 509 "$1-509"
   mkdir /mnt/$1509
-  chgrp $1-509 /mnt/$1509
+  chgrp "$1-509" /mnt/$1509
   chmod 2775 /mnt/$1509
-  for (( i=0;i<20;i++ )); do
+  for (( i=0;i<2000;i++ )); do
     sudo useradd -c "$1-Clone$i" -p $PASS -m "$1-$i"
     sudo usermod -aG "$1-509" "$1-$i"
   done
@@ -46,10 +48,47 @@ if [ $UID -ne $ROOT_UID  ]; then
 	exit $E_NOROOT
 fi
 
+make_dir(){
+  echo "START `date +%H:%M:%S:%N`"
+  for (( i = 0; i < 100; i++ )); do
+    mkdir $1$i 1>&- 2>&-
+  done
+  echo "END `date +%H:%M:%S:%N`"
+}
+
+add_text_to_file(){
+  START=`date +%M%S`
+  for i in ${@:1}; do
+    for (( j = 0; j < 1000000; j++ )); do
+      echo $j >> $i
+    done
+  done
+  END=`date +%M%S`
+  let "ELAPSED=$END-$START"
+  echo "ELAPSED "$ELAPSED
+}
+
+get_text_from_file(){
+  START=`date +%M%S`
+  grep -rnw ${@:3} -e $2
+  END=`date +%M%S`
+  let "ELAPSED=$END-$START"
+  echo "ELAPSED "$ELAPSED
+}
+
 case $1 in
   add)
     useradd $2;;
 
   id)
     identify;;
+
+  adddir)
+    make_dir $2;;
+
+  text)
+    add_text_to_file ${@:2};;
+
+  search)
+    get_text_from_file ${@:1};;
 esac
